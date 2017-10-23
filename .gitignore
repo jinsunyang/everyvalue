@@ -1,0 +1,8 @@
+.idea/*
+*/log
+#*/*/.keep
+#*/*/*/.keep
+#*/*/*/*/.keep
+#*/*/*/*/*/.keep
+.keep
+*/*.iml
