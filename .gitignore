@@ -1,9 +1,10 @@
 .idea/*
 */log
+.keep
+*/*.iml
+*/*/*.sqlite3
+
 #*/*/.keep
 #*/*/*/.keep
 #*/*/*/*/.keep
 #*/*/*/*/*/.keep
-.keep
-*/*.iml
-*/*/*.sqlite3
