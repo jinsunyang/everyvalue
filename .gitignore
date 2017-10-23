@@ -6,3 +6,4 @@
 #*/*/*/*/*/.keep
 .keep
 */*.iml
+*/*/*.sqlite3
