@@ -3,6 +3,7 @@
 .keep
 */*.iml
 */*/*.sqlite3
+/*/tmp/*
 
 #*/*/.keep
 #*/*/*/.keep
