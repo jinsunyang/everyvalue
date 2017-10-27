@@ -21,30 +21,7 @@
     <%= form.text_field :nickname, id: :user_nickname %>
   </div>
 
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone, id: :user_phone %>
-  </div>
 
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.number_field :gender, id: :user_gender %>
-  </div>
-
-  <div class="field">
-    <%= form.label :birth_date %>
-    <%= form.date_select :birth_date, id: :user_birth_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :identity_provider %>
-    <%= form.text_field :identity_provider, id: :user_identity_provider %>
-  </div>
-
-  <div class="field">
-    <%= form.label :is_authorized %>
-    <%= form.check_box :is_authorized, id: :user_is_authorized %>
-  </div>
 
   <div class="actions">
     <%= form.submit %>
