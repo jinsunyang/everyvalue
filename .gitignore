@@ -4,6 +4,7 @@
 */*.iml
 */*/*.sqlite3
 /*/tmp/*
+/*/*.env
 
 #*/*/.keep
 #*/*/*/.keep
