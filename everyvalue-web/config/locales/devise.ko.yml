@@ -9,10 +9,10 @@ ko:
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account is not activated yet."
-      invalid: "Invalid %{authentication_keys} or password."
+      invalid: "아이디 또는 비밀번호를 잘못입력하셨습니다.(비번틀림)"
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
-      not_found_in_database: "아이디 또는 비밀번호를 잘못 입력하셨습니다."
+      not_found_in_database: "아이디 또는 비밀번호를 잘못 입력하셨습니다.(아이디 없음)"
       timeout: "Your session expired. Please sign in again to continue."
       unauthenticated: "You need to sign in or sign up before continuing."
       unconfirmed: "You have to confirm your email address before continuing."
