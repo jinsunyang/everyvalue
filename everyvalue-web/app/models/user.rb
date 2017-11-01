@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
   include BaseUser
 
+  RECAPTCHA_EXPOSURE_LOGIN_ATTEMPT_COUNT = 1
+
   #override devise's methods for email validation incapacitate when validatable devise option activated
   #####################################################################################################
   def email_required?

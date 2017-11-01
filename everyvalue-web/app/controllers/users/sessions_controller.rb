@@ -1,12 +1,19 @@
 class Users::SessionsController < Devise::SessionsController
+  before_action :check_recaptcha, only: [:create]
   before_action :configure_permitted_parameters
 
   def create
-    self.resource = warden.authenticate!(auth_options)
-    set_flash_message!(:notice, :signed_in)
-    sign_in(resource_name, resource)
-    yield resource if block_given?
-    respond_with resource, location: after_sign_in_path_for(resource)
+    super
+    cookies.delete(:ID_RCP, domain: request.domain) if cookies[:ID_RCP].present?
+  end
+
+  private
+  def check_recaptcha
+    if params.key?('g-recaptcha-response') && !verify_recaptcha
+      self.resource = resource_class.new sign_in_params
+      resource.validate
+      respond_with_navigational(resource) { render :new }
+    end
   end
 
   protected
