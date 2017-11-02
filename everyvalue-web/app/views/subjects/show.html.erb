@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @subject.title %>
+</p>
+
+<p>
+  <strong>Contents:</strong>
+  <%= @subject.contents %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @subject.user %>
+</p>
+
+<p>
+  <strong>User nickname:</strong>
+  <%= @subject.user_nickname %>
+</p>
+
+<p>
+  <strong>Average value:</strong>
+  <%= @subject.average_value %>
+</p>
+
+<%= link_to 'Edit', edit_subject_path(@subject) %> |
+<%= link_to 'Back', subjects_path %>
