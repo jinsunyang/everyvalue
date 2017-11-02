@@ -1,0 +1,37 @@
+<%= form_with(model: valuation, local: true) do |form| %>
+  <% if valuation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(valuation.errors.count, "error") %> prohibited this valuation from being saved:</h2>
+
+      <ul>
+      <% valuation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :subject_id %>
+    <%= form.text_field :subject_id, id: :valuation_subject_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :valuation_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_nickname %>
+    <%= form.text_field :user_nickname, id: :valuation_user_nickname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, id: :valuation_price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

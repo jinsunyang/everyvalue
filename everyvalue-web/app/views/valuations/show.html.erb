@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @valuation.subject %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @valuation.user %>
+</p>
+
+<p>
+  <strong>User nickname:</strong>
+  <%= @valuation.user_nickname %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @valuation.price %>
+</p>
+
+<%= link_to 'Edit', edit_valuation_path(@valuation) %> |
+<%= link_to 'Back', valuations_path %>
