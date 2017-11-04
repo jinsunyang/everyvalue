@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subject_attachments
   resources :valuations
   resources :hashtags
   resources :subjects

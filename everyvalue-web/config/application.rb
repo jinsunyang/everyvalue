@@ -36,6 +36,9 @@ module EveryvalueWeb
     # devise 등에서 사용하는 i18n message를 변경하기 위해 default_locale 설정
     config.i18n.default_locale = :ko
 
+    #to resolve accepts_nested_attributes_for bug in rails 5
+    config.active_record.belongs_to_required_by_default = false
+
     # 배포 stage 별 환경변수 적용
     Dotenv.load("#{Rails.env}.env")
   end

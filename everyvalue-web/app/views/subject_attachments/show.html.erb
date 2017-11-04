@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @subject_attachment.subject %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @subject_attachment.content %>
+</p>
+
+<%= link_to 'Edit', edit_subject_attachment_path(@subject_attachment) %> |
+<%= link_to 'Back', subject_attachments_path %>

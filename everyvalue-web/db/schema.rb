@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102073450) do
+ActiveRecord::Schema.define(version: 20171104143548) do
+
+  create_table "hashtags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hashtags_subjects", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "subject_id", null: false
+    t.bigint "hashtag_id", null: false
+    t.index ["hashtag_id"], name: "index_hashtags_subjects_on_hashtag_id"
+    t.index ["subject_id"], name: "index_hashtags_subjects_on_subject_id"
+  end
+
+  create_table "subject_attachments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "subject_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_subject_attachments_on_subject_id"
+  end
 
   create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string "title", null: false
@@ -49,5 +70,19 @@ ActiveRecord::Schema.define(version: 20171102073450) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "valuations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+    t.bigint "subject_id"
+    t.bigint "user_id"
+    t.string "user_nickname"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subject_id"], name: "index_valuations_on_subject_id"
+    t.index ["user_id"], name: "index_valuations_on_user_id"
+  end
+
+  add_foreign_key "subject_attachments", "subjects"
   add_foreign_key "subjects", "users"
+  add_foreign_key "valuations", "subjects"
+  add_foreign_key "valuations", "users"
 end

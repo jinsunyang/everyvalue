@@ -1,4 +1,4 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class ContentUploader < CarrierWave::Uploader::Base
   after :remove, :delete_empty_upstream_dirs
 
   # Include RMagick or MiniMagick support:
