@@ -36,7 +36,11 @@
     <%= form.number_field :average_value, id: :subject_average_value %>
   </div>
 
+  <%= form.fields_for :subject_attachments do |at| %>
+    <%= at.file_field :content, multiple: true, name: 'subject_attachments[content][]', class: 'dropzone' %>
+  <% end %>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Create Subject', class: 'btn btn-success-outline' %>
   </div>
 <% end %>
