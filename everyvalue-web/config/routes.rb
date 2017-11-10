@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   resources :valuations
   resources :hashtags
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :subject_attachments
+
+  root 'root#home'
 end
