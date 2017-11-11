@@ -29,8 +29,11 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.save
-        params[:subject_attachments]['content'].each do |c|
-          @subject.subject_attachments.create!(content: c)
+        subject_attachments = params[:subject_attachments]
+        if subject_attachments.present? && subject_attachments['content'].present?
+          subject_attachments['content'].each do |c|
+            @subject.subject_attachments.create!(content: c)
+          end
         end
 
         format.html { redirect_to @subject, notice: 'Subject was successfully created.' }
