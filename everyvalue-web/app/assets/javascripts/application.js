@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require dropzone
 //= require_tree .
+
+// how to disable turbolinks https://stackoverflow.com/questions/38649550/how-to-disable-turbolinks-in-rails-5
+// require turbolinks
