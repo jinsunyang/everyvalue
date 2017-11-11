@@ -4,7 +4,7 @@ class Subject < ApplicationRecord
   has_many :subject_attachments, dependent: :destroy
   accepts_nested_attributes_for :subject_attachments, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true
 
-  def self.ransackable_attributes
-    %w(title contents title_or_contents user_nickname) + _ransackers.keys
+  def self.ransackable_attributes(auth_object = nil)
+    %w(title_cont contents_cont title_or_contents_cont user_nickname) + _ransackers.keys
   end
 end

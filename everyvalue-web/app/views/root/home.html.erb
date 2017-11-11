@@ -11,29 +11,28 @@
         <% @hashtags.each do |h| %>
             <li><%= link_to h.name, root_path(hashtag_id: h.id), { name: 'selected_hashtag', value: h.id } %></li>
         <% end %>
-        <li class="dropdown">
-          <a data-toggle="dropdown" class="dropdown-toggle" href="#">검색<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Inbox</a></li>
-            <li><a href="#">Drafts</a></li>
-            <li><a href="#">Sent Items</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Trash</a></li>
-          </ul>
-        </li>
+        <%= search_form_for @selected_subjects, url: root_path, html: { class: 'navbar-form navbar-left' } do |f| %>
+            <%= f.condition_fields do |c| %>
+              <%= c.attribute_fields do |a| %>
+                  <%= a.attribute_select({ include_blank: false }, { class: 'selectpicker' }) %>
+              <% end %>
+              <%= c.value_fields do |v| %>
+                  <%= v.text_field :value, { class: 'form-control', placeholder: '내용을 입력하세요.' } %>
+              <% end %>
+            <% end %>
+          <%= f.submit('검색', { class: 'btn btn-default' }) %>
+        <% end %>
+        <!--<li class="dropdown">-->
+          <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">검색<b class="caret"></b></a>-->
+          <!--<ul class="dropdown-menu">-->
+            <!--<li><a href="#">Inbox</a></li>-->
+            <!--<li><a href="#">Drafts</a></li>-->
+            <!--<li><a href="#">Sent Items</a></li>-->
+            <!--<li class="divider"></li>-->
+            <!--<li><a href="#">Trash</a></li>-->
+          <!--</ul>-->
+        <!--</li>-->
       </ul>
-
-
-
-      <form class="navbar-form navbar-left">
-        <input type="hidden" id="selected_hashtag_hidden_field" />
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search">
-          <span class="input-group-btn">
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-        </span>
-        </div>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Login</a></li>
       </ul>
