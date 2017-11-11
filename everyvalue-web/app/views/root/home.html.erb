@@ -7,31 +7,24 @@
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to '전체', root_path %></li>
+        <li class="active" name="selected_hashtag" id="selected_hashtag_0"><%= link_to '전체', root_path %></li>
         <% @hashtags.each do |h| %>
-            <li><%= link_to h.name, root_path(hashtag_id: h.id), { name: 'selected_hashtag', value: h.id } %></li>
+            <li id="selected_hashtag_<%= h.id %>" name="selected_hashtag"><%= link_to h.name, root_path(hashtag_id: h.id), { value: h.id } %></li>
         <% end %>
+
         <%= search_form_for @selected_subjects, url: root_path, html: { class: 'navbar-form navbar-left' } do |f| %>
             <%= f.condition_fields do |c| %>
-              <%= c.attribute_fields do |a| %>
-                  <%= a.attribute_select({ include_blank: false }, { class: 'selectpicker' }) %>
-              <% end %>
-              <%= c.value_fields do |v| %>
-                  <%= v.text_field :value, { class: 'form-control', placeholder: '내용을 입력하세요.' } %>
-              <% end %>
+                <%= c.attribute_fields do |a| %>
+                    <%= a.attribute_select({ include_blank: false }, { class: 'selectpicker subject_search_select' }) %>
+                <% end %>
+                <%= c.predicate_select({ compounds: false }, { style: 'display: none;', class: 'subject_search_predicate_select' }) %>
+                <%= c.value_fields do |v| %>
+                    <%= v.text_field :value, { class: 'form-control', placeholder: '내용을 입력하세요.' } %>
+                <% end %>
             <% end %>
+            <input type="hidden" name="q[selected_hashtag_hidden]" id="selected_hashtag_hidden" />
           <%= f.submit('검색', { class: 'btn btn-default' }) %>
         <% end %>
-        <!--<li class="dropdown">-->
-          <!--<a data-toggle="dropdown" class="dropdown-toggle" href="#">검색<b class="caret"></b></a>-->
-          <!--<ul class="dropdown-menu">-->
-            <!--<li><a href="#">Inbox</a></li>-->
-            <!--<li><a href="#">Drafts</a></li>-->
-            <!--<li><a href="#">Sent Items</a></li>-->
-            <!--<li class="divider"></li>-->
-            <!--<li><a href="#">Trash</a></li>-->
-          <!--</ul>-->
-        <!--</li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Login</a></li>

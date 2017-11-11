@@ -2,7 +2,7 @@ ko:
   ransack:
     attributes:
       subject:
-        title_cont: 제목
-        contents_cont: 내용
-        title_or_contents_cont: 제목+내용
+        title: 제목
+        contents: 내용
+        title_or_contents: 제목+내용
         user_nickname: 닉네임

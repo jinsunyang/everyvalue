@@ -18,3 +18,13 @@
 
 // how to disable turbolinks https://stackoverflow.com/questions/38649550/how-to-disable-turbolinks-in-rails-5
 // require turbolinks
+
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+    if (results == null){
+        return null;
+    }
+    else{
+        return results[1] || 0;
+    }
+}
