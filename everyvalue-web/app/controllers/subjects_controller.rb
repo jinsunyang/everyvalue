@@ -11,6 +11,11 @@ class SubjectsController < ApplicationController
   # GET /subjects/1
   # GET /subjects/1.json
   def show
+    @comments = @subject.comments
+    replies = Reply.where(id: @comments.map(&:id))
+    @comments.each do |c|
+      c.searched_replies = replies.select { |r| r.comment_id == c.id }
+    end
   end
 
   # GET /subjects/new
@@ -30,7 +35,6 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.save
-        puts "saved subject id is : #{@subject.id}"
         HashtagsSubject.create(hashtag_id: @hashtag_id, subject_id: @subject.id)
         subject_attachments = params[:subject_attachments]
         if subject_attachments.present? && subject_attachments['content'].present?
