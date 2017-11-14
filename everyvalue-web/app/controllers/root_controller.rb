@@ -8,7 +8,7 @@ class RootController < ApplicationController
     q[:selected_hashtag_hidden] = params[:hashtag_id] if params[:hashtag_id].present?
 
     @selected_subjects = subjects_by_ransack(q)
-    @subjects = @selected_subjects.result
+    @subjects = @selected_subjects.result.page(@page).per(@per)
     @selected_subjects.build_condition if @selected_subjects.conditions.empty?
   end
 

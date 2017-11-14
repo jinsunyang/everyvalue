@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :replies
+  resources :comments
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   resources :subjects
   resources :valuations

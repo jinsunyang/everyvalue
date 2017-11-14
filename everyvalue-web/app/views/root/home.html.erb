@@ -13,21 +13,23 @@
         <% end %>
 
         <%= search_form_for @selected_subjects, url: root_path, html: { class: 'navbar-form navbar-left' } do |f| %>
+            <!-- condition_fields를 쓰면 "c"=>{"0"=>{"a"=>{"0"=>{"name"=>"title"}, "1"=>{"name"=>"content"}}, "p"=>"cont", "v"=>{"0"=>{"value"=>"ㅂㄱㅂㅈㄱ"}, "1"=>{"value"=>"ㄷㅈㄱ"}}}} 와 같이 매우 복잡..-->
+            <!-- condition_fields를 안쓰고 기본 ransack query 파라미터를 보면.. "q"=>{"agent_eq"=>"", "os_eq"=>"", "is_published_eq"=>"", "title_or_content_cont"=>"ㅂㄱㅂㄱ"} 와 같이 단순 -->
             <%= f.condition_fields do |c| %>
                 <%= c.attribute_fields do |a| %>
-                    <%= a.attribute_select({ include_blank: false }, { class: 'selectpicker subject_search_select' }) %>
+                  <%= a.attribute_select({ include_blank: false }, { class: 'selectpicker subject_search_select' }) %>
                 <% end %>
                 <%= c.predicate_select({ compounds: false }, { style: 'display: none;', class: 'subject_search_predicate_select' }) %>
                 <%= c.value_fields do |v| %>
                     <%= v.text_field :value, { class: 'form-control', placeholder: '내용을 입력하세요.' } %>
                 <% end %>
+                <input type="hidden" name="q[selected_hashtag_hidden]" id="selected_hashtag_hidden" />
+              <%= f.submit('검색', { class: 'btn btn-default' }) %>
             <% end %>
-            <input type="hidden" name="q[selected_hashtag_hidden]" id="selected_hashtag_hidden" />
-          <%= f.submit('검색', { class: 'btn btn-default' }) %>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Login</a></li>
+        <li><%= link_to '로그인', new_user_session_path %></li>
       </ul>
     </div>
   </div>
@@ -54,5 +56,14 @@
     <% end %>
     </tbody>
   </table>
-  <%= link_to 'New Subject', new_subject_path %>
+</div>
+<div class="container">
+  <div class="col-lg-8 col-md-8 col-xs-8">
+    <div class="text-center">
+      <%= paginate @subjects %>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-4 col-xs-4">
+    <%= link_to '새로 평가하기', new_subject_path %>
+  </div>
 </div>
