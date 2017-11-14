@@ -32,8 +32,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :average_value %>
-    <%= form.number_field :average_value, id: :subject_average_value %>
+    <label>Category</label>
+    <select id="select_hashtag">
+      <% hashtags_options.each do |hashtag| %>
+          <option value="<%= hashtag.id %>" <% if hashtags_options.first == hashtag %>selected="selected" <% end %>> <%= hashtag.name %></option>
+      <% end %>
+    </select>
+    <input type="hidden" name="subject[hashtag_id]" id="subject_hashtag_id"/>
   </div>
 
   <%= form.fields_for :subject_attachments do |at| %>

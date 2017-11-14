@@ -54,3 +54,10 @@ $(":file").filestyle();
 //
 //     });
 // });
+
+$(document).ready( function() {
+    $("input[name='subject[hashtag_id]']").val($("#select_hashtag option:selected").val());
+    $("#select_hashtag").change(function() {
+        $("input[name='subject[hashtag_id]']").val($("#select_hashtag option:selected").val());
+    });
+});

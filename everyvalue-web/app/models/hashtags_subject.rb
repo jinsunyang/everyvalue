@@ -1,0 +1,2 @@
+class HashtagsSubject < ApplicationRecord
+end

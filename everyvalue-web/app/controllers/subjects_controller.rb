@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :set_hashtag_id, only: [:create, :update]
 
   # GET /subjects
   # GET /subjects.json
@@ -29,6 +30,8 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.save
+        puts "saved subject id is : #{@subject.id}"
+        HashtagsSubject.create(hashtag_id: @hashtag_id, subject_id: @subject.id)
         subject_attachments = params[:subject_attachments]
         if subject_attachments.present? && subject_attachments['content'].present?
           subject_attachments['content'].each do |c|
@@ -73,6 +76,10 @@ class SubjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_subject
       @subject = Subject.find(params[:id])
+    end
+
+    def set_hashtag_id
+      @hashtag_id = params[:subject][:hashtag_id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

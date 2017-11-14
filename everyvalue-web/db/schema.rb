@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20171104143548) do
   end
 
   create_table "hashtags_subjects", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-    t.bigint "subject_id", null: false
     t.bigint "hashtag_id", null: false
+    t.bigint "subject_id", null: false
     t.index ["hashtag_id"], name: "index_hashtags_subjects_on_hashtag_id"
     t.index ["subject_id"], name: "index_hashtags_subjects_on_subject_id"
   end
