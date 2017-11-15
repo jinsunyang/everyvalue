@@ -1,64 +1,56 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <p>
+    <strong>Title:</strong>
+    <%= @subject.title %>
+  </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @subject.title %>
-</p>
+  <p>
+    <strong>Contents:</strong>
+    <%= @subject.contents %>
+  </p>
 
-<p>
-  <strong>Contents:</strong>
-  <%= @subject.contents %>
-</p>
+  <p>
+    <strong>User:</strong>
+    <%= @subject.user %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @subject.user %>
-</p>
+  <p>
+    <strong>User nickname:</strong>
+    <%= @subject.user_nickname %>
+  </p>
 
-<p>
-  <strong>User nickname:</strong>
-  <%= @subject.user_nickname %>
-</p>
-
-<p>
-  <strong>Average value:</strong>
-  <%= @subject.average_value %>
-</p>
-
-
+  <p>
+    <strong>Average value:</strong>
+    <%= @subject.average_value %>
+  </p>
+</div>
 <!-- 댓글 영역 -->
-<h1>Comments</h1>
-
-<table>
-  <thead>
-  <tr>
-    <th>User</th>
-    <th>User nickname</th>
-    <th>Contents</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @comments.each do |comment| %>
-      <tr>
-        <td><%= comment.subject %></td>
-        <td><%= comment.user %></td>
-        <td><%= comment.user_nickname %></td>
-        <td><%= comment.contents %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
 <!-- 댓글 목록 -->
+<div class="chatContainer">
+  <div class="chatTitleContainer">댓글</div>
+  <div class="chatHistoryContainer">
+    <ul class="formComments">
+      <% @comments.each do |comment| %>
+          <%= render partial: 'subjects/comment', locals: {comment: comment } %>
+      <% end %>
+    </ul>
+  </div>
 
-
-<!-- 내 댓글 다는 영역 -->
-
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
-<%= link_to 'Back', subjects_path %>
+  <!-- 내 댓글 다는 영역 -->
+  <div class="input-group input-group-sm chatMessageControls">
+    <span class="input-group-addon" id="sizing-addon3">댓글 작성</span>
+    <input type="text" class="form-control" placeholder="내용을 입력하세요." aria-describedby="sizing-addon3">
+    <span class="input-group-btn">
+      <button id="clearMessageButton" class="btn btn-default" type="button">초기화</button>
+      <button id="sendMessageButton" class="btn btn-primary" type="button"><i class="fa fa-send"></i>저장</button>
+    </span>
+    <span class="input-group-btn">
+      <button id="undoSendButton" class="btn btn-default" type="button" disabled><i class="fa fa-undo"></i>취소</button>
+    </span>
+  </div>
+</div>
+<div class="container">
+  <%= link_to 'Edit', edit_subject_path(@subject) %> |
+  <%= link_to 'Back', subjects_path %>
+</div>

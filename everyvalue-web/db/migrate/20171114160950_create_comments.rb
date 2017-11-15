@@ -7,6 +7,7 @@ class CreateComments < ActiveRecord::Migration[5.1]
       t.string :user_nickname
       t.integer :user_value
       t.text :contents
+      t.integer :depth, default: 0
 
       t.timestamps
     end

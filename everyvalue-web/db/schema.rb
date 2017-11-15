@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20171114160950) do
     t.string "user_nickname"
     t.integer "user_value"
     t.text "contents"
+    t.integer "depth", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["parent_id"], name: "index_comments_on_parent_id"
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 20171114160950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_subjects_on_user_id"
+    t.index ["user_nickname"], name: "index_subjects_on_user_nickname"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
@@ -95,8 +97,4 @@ ActiveRecord::Schema.define(version: 20171114160950) do
     t.index ["user_id"], name: "index_valuations_on_user_id"
   end
 
-  add_foreign_key "subject_attachments", "subjects"
-  add_foreign_key "subjects", "users"
-  add_foreign_key "valuations", "subjects"
-  add_foreign_key "valuations", "users"
 end

@@ -12,6 +12,8 @@ class SubjectsController < ApplicationController
   # GET /subjects/1.json
   def show
     @comments = @subject.comments
+
+
     # replies = Reply.where(id: @comments.map(&:id))
     # @comments.each do |c|
     #   c.searched_replies = replies.select { |r| r.comment_id == c.id }
@@ -75,6 +77,11 @@ class SubjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # def comment
+  #   @comments = Subject.find(1).comments
+  #
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

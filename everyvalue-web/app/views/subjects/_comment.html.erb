@@ -1,0 +1,25 @@
+<li class="commentLi" data-commentid="<%= comment.id %>" style="margin-left: calc(0px + 48*<%= comment.depth %>px);">
+  <table class="form-comments-table">
+    <tr>
+      <td><div class="comment-user"><%= comment.user_nickname %></div></td>
+      <td><div class="comment-timestamp"><%= comment.updated_at %></div></td>
+      <td>
+        <div id="comment-<%= comment.id %>" data-commentid="<%= comment.id %>" class="comment comment-step<%= comment.id %>" >
+          <%= comment.contents %>
+          <div id="commentactions-<%= comment.id %>" class="comment-actions">
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>답글</button>
+              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i>수정</button>
+              <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i >삭제</button>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <% if comment.children.present? %>
+      <% comment.children.each do |child| %>
+          <%= render partial: 'subjects/comment', locals: { comment: child } %>
+      <% end %>
+  <% end %>
+</li>
