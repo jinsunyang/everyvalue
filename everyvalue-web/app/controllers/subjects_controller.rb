@@ -12,10 +12,10 @@ class SubjectsController < ApplicationController
   # GET /subjects/1.json
   def show
     @comments = @subject.comments
-    replies = Reply.where(id: @comments.map(&:id))
-    @comments.each do |c|
-      c.searched_replies = replies.select { |r| r.comment_id == c.id }
-    end
+    # replies = Reply.where(id: @comments.map(&:id))
+    # @comments.each do |c|
+    #   c.searched_replies = replies.select { |r| r.comment_id == c.id }
+    # end
   end
 
   # GET /subjects/new

@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :parent_id %>
+    <%= form.number_field :parent_id, id: :comment_parent_id %>
+  </div>
+
+  <div class="field">
     <%= form.label :user_id %>
     <%= form.text_field :user_id, id: :comment_user_id %>
   </div>
@@ -24,6 +29,11 @@
   <div class="field">
     <%= form.label :user_nickname %>
     <%= form.text_field :user_nickname, id: :comment_user_nickname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_value %>
+    <%= form.number_field :user_value, id: :comment_user_value %>
   </div>
 
   <div class="field">

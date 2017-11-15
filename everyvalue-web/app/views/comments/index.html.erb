@@ -6,8 +6,10 @@
   <thead>
     <tr>
       <th>Subject</th>
+      <th>Parent</th>
       <th>User</th>
       <th>User nickname</th>
+      <th>User value</th>
       <th>Contents</th>
       <th colspan="3"></th>
     </tr>
@@ -17,8 +19,10 @@
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.subject %></td>
+        <td><%= comment.parent_id %></td>
         <td><%= comment.user %></td>
         <td><%= comment.user_nickname %></td>
+        <td><%= comment.user_value %></td>
         <td><%= comment.contents %></td>
         <td><%= link_to 'Show', comment %></td>
         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
