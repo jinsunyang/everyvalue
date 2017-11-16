@@ -7,10 +7,13 @@
         <div id="comment-<%= comment.id %>" data-commentid="<%= comment.id %>" class="comment comment-step<%= comment.id %>" >
           <%= comment.contents %>
           <div id="commentactions-<%= comment.id %>" class="comment-actions">
-            <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>답글</button>
-              <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i>수정</button>
-              <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i >삭제</button>
+            <div class="input-group input-group-sm" role="group">
+              <input type="text" class="form-control" placeholder="답글을 입력하세요." aria-describedby="sizing-addon3" id="reply-text-<%= comment.id %>" data-commentid="<%= comment.id %>">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-primary btn-sm" id="reply-to-<%= comment.id %>" data-commentid="<%= comment.id %>"><i class="fa fa-edit"></i>답글</button>
+                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i>수정</button>
+                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i >삭제</button>
+              </span>
             </div>
           </div>
         </div>

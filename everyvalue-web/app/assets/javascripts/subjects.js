@@ -1,12 +1,23 @@
 $(":file").filestyle();
 
+var detectReplyInputFocusedHash = {};
+
 $(document).ready( function() {
     $("input[name='subject[hashtag_id]']").val($("#select_hashtag option:selected").val());
     $("#select_hashtag").change(function() {
         $("input[name='subject[hashtag_id]']").val($("#select_hashtag option:selected").val());
     });
 
+    // comment의 답글 ui를 컨트롤 하기 위한 메서드
+    detectReplyInputFocused();
     initUIEvents();
+    ///////////////////////////////////////
+
+    //댓글을 저장하기 위한 메서드
+    submitComment();
+
+    //답글을 저장하기 위한 메서드
+    submitReply();
 });
 
 function initUIEvents() {
@@ -22,11 +33,57 @@ function initUIEvents() {
 
     }, function () {
         var currentComment = $(this).data("commentid");
-        $("#comment-" + currentComment).stop().animate({opacity: "1", backgroundColor: "#fff", borderLeftWidth: "1px"},{duration: 100, complete: function() {}} );
-        $("#commentactions-" + currentComment).slideUp("fast");
+
+        if($('#reply-text-' + currentComment).val().length == 0 && (detectReplyInputFocusedHash[currentComment] == null || detectReplyInputFocusedHash[currentComment] != "focused")) {
+            $("#comment-" + currentComment).stop().animate({opacity: "1", backgroundColor: "#fff", borderLeftWidth: "1px"},{duration: 100, complete: function() {}} );
+            $("#commentactions-" + currentComment).slideUp("fast");
+        }
     });
 }
 
+function detectReplyInputFocused() {
+    $('input[id^="reply-text-"]').focusin(function() {
+        detectReplyInputFocusedHash[$(this).data("commentid")] = "focused";
+    });
+
+    $('input[id^="reply-text-"]').focusout(function() {
+        var currentComment = $(this).data("commentid");
+
+        delete detectReplyInputFocusedHash[currentComment];
+
+        if ($(this).val().length == 0) {
+            $("#comment-" + currentComment).stop().animate({opacity: "1", backgroundColor: "#fff", borderLeftWidth: "1px"},{duration: 100, complete: function() {}} );
+            $("#commentactions-" + currentComment).slideUp("fast");
+        }
+    });
+}
+
+function submitComment() {
+    $("#sendMessageButton").click(function() {
+        var commentValue = $("#commentText").val();
+
+        if (commentValue.length == 0) {
+            alert("댓글을 입력하세요.");
+        } else {
+            //async 하게 또는 sync하게 댓글 저장하는 로직
+            console.log(commentValue);
+        }
+    });
+}
+
+function submitReply() {
+    $('button[id^="reply-to"]').click(function(){
+        var currentComment = $(this).data("commentid");
+        var replyValue = $('#reply-text-' + currentComment).val();
+
+        if (replyValue.length == 0) {
+            alert("답글을 입력하세요.");
+        } else {
+            //async 하게 또는 sync하게 답글 저장하는 로직
+            console.log(replyValue);
+        }
+    });
+}
 
 // $(document).ready(function() {
 //     // disable auto discover
