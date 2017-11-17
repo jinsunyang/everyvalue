@@ -28,7 +28,7 @@
 <!-- 댓글 영역 -->
 <!-- 댓글 목록 -->
 <div class="chatContainer">
-  <div class="chatTitleContainer">댓글</div>
+  <!--<div class="chatTitleContainer">댓글</div>-->
   <div class="chatHistoryContainer">
     <ul class="formComments">
       <% @comments.each do |comment| %>
@@ -54,3 +54,5 @@
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
   <%= link_to 'Back', subjects_path %>
 </div>
+<textarea id="textarea-subject-id" style="display:none;"><%= @subject.id %></textarea>
+<textarea id="textarea-user-value" style="display:none;"><%= @user_value_on_subject %></textarea>

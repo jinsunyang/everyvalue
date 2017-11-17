@@ -2,6 +2,7 @@ class Subject < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :hashtags
   has_many :subject_attachments, dependent: :destroy
+  has_many :valuations
   has_many :comments
 
   accepts_nested_attributes_for :subject_attachments, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true

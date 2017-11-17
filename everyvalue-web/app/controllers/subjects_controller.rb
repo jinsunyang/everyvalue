@@ -13,6 +13,8 @@ class SubjectsController < ApplicationController
   def show
     @comments = @subject.comments
 
+    user_valuation = @subject.valuations.where(user_id: 1).first
+    @user_value_on_subject = user_valuation.price if user_valuation.present?
 
     # replies = Reply.where(id: @comments.map(&:id))
     # @comments.each do |c|

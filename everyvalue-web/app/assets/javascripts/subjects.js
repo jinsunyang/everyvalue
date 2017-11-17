@@ -66,7 +66,14 @@ function submitComment() {
             alert("댓글을 입력하세요.");
         } else {
             //async 하게 또는 sync하게 댓글 저장하는 로직
-            console.log(commentValue);
+
+            var userValue = $("#textarea-user-value").val();
+
+            if(userValue == null) {
+                alert("평가 후 댓글을 달 수 있습니다.");
+            } else {
+                postComment(commentValue, null);
+            }
         }
     });
 }
@@ -79,10 +86,45 @@ function submitReply() {
         if (replyValue.length == 0) {
             alert("답글을 입력하세요.");
         } else {
-            //async 하게 또는 sync하게 답글 저장하는 로직
-            console.log(replyValue);
+            postComment(replyValue, currentComment);
         }
     });
+}
+
+function postComment(contents, parentCommentId) {
+    //async 하게 또는 sync하게 답글 저장하는 로직
+    var userValue = $("#textarea-user-value").val();
+
+    if(userValue == null) {
+        if(parentCommentId == null) {
+            alert("평가 후 댓글을 달 수 있습니다.");
+        } else {
+            alert("평가 후 답글을 달 수 있습니다.");
+        }
+    } else {
+        var data_params = "comment[user_id]=" + "1" + "&comment[contents]=" + contents;
+
+        if (parentCommentId == null) {
+            data_params += "comment[subject_id]=" + $("#textarea-subject-id").val();
+        } else {
+            data_params += "&comment[parent_id]=" + parentCommentId;
+        }
+
+        $.ajax({
+            url: '/comments',
+            type: 'POST',
+            data: data_params,
+            success: function() {
+                location.reload();
+            },
+            error: function(e) {
+                console.log(e.status);
+                if (e.status == 404) {
+                    alert('로그인 후 이용해 주세요.');
+                }
+            }
+        });
+    }
 }
 
 // $(document).ready(function() {

@@ -20,7 +20,7 @@
 
   height: 100%;
   width: 100%;
-  background-color: #e4e4e4;
+  //background-color: #e4e4e4;
   padding: 20px;
 
 }
@@ -103,8 +103,14 @@
   white-space: nowrap;
 }
 
+#img-reply-arrow {
+  width:30px;
+  height:30px;
+  opacity: 0.6;
+}
+
 // for nickname
-.form-comments-table tr:nth-child(1) td:nth-child(1) {
+.form-comments-table tr:nth-child(1) td:nth-child(2) {
   padding-top: 8px;
   font-size: 9pt;
   color: #737373;
@@ -113,11 +119,11 @@
 }
 
 // for timestamp
-.form-comments-table tr:nth-child(1) td:nth-child(2) {
+.form-comments-table tr:nth-child(1) td:nth-child(3) {
   padding-top: 8px;
 }
 
-.form-comments-table tr:nth-child(1) td:nth-child(2) {
+.form-comments-table tr:nth-child(1) td:nth-child(3) {
   font-size: 9pt;
   color: #a7a7a7;
   white-space: nowrap;
@@ -130,11 +136,11 @@
 //}
 
 // for contents
-.form-comments-table tr:nth-child(1) td:nth-child(3) {
+.form-comments-table tr:nth-child(1) td:nth-child(4) {
   width: 100%;
 }
 
-.form-comments-table tr:nth-child(1) td:nth-child(4) {
+.form-comments-table tr:nth-child(1) td:nth-child(5) {
 
 }
 

@@ -1,6 +1,11 @@
 <li class="commentLi" data-commentid="<%= comment.id %>" style="margin-left: calc(0px + 48*<%= comment.depth %>px);">
   <table class="form-comments-table">
     <tr>
+      <td>
+        <% if comment.parent.present? %>
+            <img id="img-reply-arrow" src="/assets/img_back_btn.png" />
+        <% end %>
+      </td>
       <td><div class="comment-user"><%= comment.user_nickname %></div></td>
       <td><div class="comment-timestamp"><%= comment.updated_at %></div></td>
       <td>
