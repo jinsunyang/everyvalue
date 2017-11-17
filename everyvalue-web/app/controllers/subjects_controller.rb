@@ -1,4 +1,5 @@
 class SubjectsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_action :set_hashtag_id, only: [:create, :update]
 

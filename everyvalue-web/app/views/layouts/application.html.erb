@@ -9,6 +9,10 @@
   </head>
 
   <body>
+    <% if flash[:alert] %> <!-- flash[:status] && flash[:status] == 404 && -->
+        <div class="alert"><%= flash[:alert] %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

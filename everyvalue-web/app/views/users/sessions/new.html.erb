@@ -1,10 +1,9 @@
 <h2>Log in</h2>
+<%- flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+<%- end -%>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-    <%- end -%>
-
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
