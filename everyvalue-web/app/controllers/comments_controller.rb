@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  # before_action :current_user, only: [:new, :create, :edit, :update]
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   # GET /comments

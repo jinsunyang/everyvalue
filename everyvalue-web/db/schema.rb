@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 20171114160950) do
   create_table "valuations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.bigint "subject_id"
     t.bigint "user_id"
-    t.string "user_nickname"
-    t.integer "price"
+    t.string "user_nickname", null: false
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_valuations_on_subject_id"

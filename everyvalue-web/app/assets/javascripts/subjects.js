@@ -92,20 +92,27 @@ function submitReply() {
 }
 
 function postComment(contents, parentCommentId) {
-    //async 하게 또는 sync하게 답글 저장하는 로직
+    var userId = $("#textarea-user-id").val();
+
+    if(userId == null || userId.length == 0) {
+        alert("로그인 후 입력할 수 있습니다.");
+        return;
+    }
+
     var userValue = $("#textarea-user-value").val();
 
-    if(userValue == null) {
+    if(userValue == null || userValue.length == 0) {
         if(parentCommentId == null) {
             alert("평가 후 댓글을 달 수 있습니다.");
         } else {
             alert("평가 후 답글을 달 수 있습니다.");
         }
     } else {
-        var data_params = "comment[user_id]=" + "1" + "&comment[contents]=" + contents;
+        var userNickname = $("#textarea-user-nickname").val();
+        var data_params = "comment[user_id]=" + userId + "&comment[contents]=" + contents + "&comment[user_nickname]=" + userNickname;
 
         if (parentCommentId == null) {
-            data_params += "comment[subject_id]=" + $("#textarea-subject-id").val();
+            data_params += "&comment[subject_id]=" + $("#textarea-subject-id").val();
         } else {
             data_params += "&comment[parent_id]=" + parentCommentId;
         }
@@ -118,10 +125,7 @@ function postComment(contents, parentCommentId) {
                 location.reload();
             },
             error: function(e) {
-                console.log(e.status);
-                if (e.status == 404) {
-                    alert('로그인 후 이용해 주세요.');
-                }
+                alert('작성에 실패했습니다.');
             }
         });
     }

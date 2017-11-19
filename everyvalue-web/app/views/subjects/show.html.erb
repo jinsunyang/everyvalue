@@ -25,6 +25,9 @@
     <%= @subject.average_value %>
   </p>
 </div>
+<div class="container">
+  
+</div>
 <!-- 댓글 영역 -->
 <!-- 댓글 목록 -->
 <div class="chatContainer">
@@ -32,7 +35,7 @@
   <div class="chatHistoryContainer">
     <ul class="formComments">
       <% @comments.each do |comment| %>
-          <%= render partial: 'subjects/comment', locals: {comment: comment } %>
+          <%= render partial: 'subjects/comment', locals: { comment: comment } %>
       <% end %>
     </ul>
   </div>
@@ -55,4 +58,6 @@
   <%= link_to 'Back', subjects_path %>
 </div>
 <textarea id="textarea-subject-id" style="display:none;"><%= @subject.id %></textarea>
+<textarea id="textarea-user-id" style="display:none;"><%= @user_id %></textarea>
+<textarea id="textarea-user-nickname" style="display:none;"><%= @user_nickname %></textarea>
 <textarea id="textarea-user-value" style="display:none;"><%= @user_value_on_subject %></textarea>

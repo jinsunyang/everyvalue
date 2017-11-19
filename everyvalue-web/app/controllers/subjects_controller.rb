@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :current_user, only: [:show]
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_action :set_hashtag_id, only: [:create, :update]
 
@@ -14,8 +15,12 @@ class SubjectsController < ApplicationController
   def show
     @comments = @subject.comments
 
-    user_valuation = @subject.valuations.where(user_id: 1).first
-    @user_value_on_subject = user_valuation.price if user_valuation.present?
+    if @current_user
+      @user_id = @current_user.id
+      @user_nickname = @current_user.nickname
+      user_valuation = @subject.valuations.where(user_id: @current_user.id).first
+      @user_value_on_subject = user_valuation.price if user_valuation.present?
+    end
 
     # replies = Reply.where(id: @comments.map(&:id))
     # @comments.each do |c|

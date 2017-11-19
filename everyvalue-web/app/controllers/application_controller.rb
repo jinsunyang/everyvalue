@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_current_user
+    @current_user = current_user
+  end
+
   def set_paginate_option
     @page = params[:page] || 1
     @per = params[:per] || 5
