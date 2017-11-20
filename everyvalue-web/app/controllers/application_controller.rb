@@ -5,6 +5,29 @@ class ApplicationController < ActionController::Base
   before_action :set_paginate_option, only: [:index, :home]
 
 
+  def set_navbar_data
+    @hashtags = Hashtag.all
+
+    q = params[:q] || {}
+    q[:selected_hashtag_hidden] = params[:hashtag_id] if params[:hashtag_id].present?
+
+    @selected_subjects = subjects_by_ransack(q)
+    @subjects = @selected_subjects.result.page(@page).per(@per)
+    @selected_subjects.build_condition if @selected_subjects.conditions.empty?
+  end
+
+  private
+  def subjects_by_ransack(q)
+    if q[:selected_hashtag_hidden].present?
+      hashtag_id = q[:selected_hashtag_hidden]
+      selected_hashtag = @hashtags.select { |s| s.id == hashtag_id.to_i }
+      selected_hashtag.first.subjects.search(q) rescue Ransack::Search.new(Subject)
+    else
+      #http://railscasts.com/episodes/370-ransack?view=asciicast
+      Subject.search(q)
+    end
+  end
+
   protected
   def authenticate_user!
     if user_signed_in?

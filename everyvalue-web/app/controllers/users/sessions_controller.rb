@@ -1,4 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
+  before_action :set_navbar_data, only: [:new]
   before_action :check_recaptcha, only: [:create]
   before_action :configure_permitted_parameters
 

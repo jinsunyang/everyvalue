@@ -19,15 +19,48 @@
     <strong>User nickname:</strong>
     <%= @subject.user_nickname %>
   </p>
+</div>
+<!-- 평가 영역 -->
+<!-- 현재 해당 subject의 평가액이 노출되는 영역 -->
+<div class="valuationContainer">
+  <div class="valuationContentsContainer">
+    <% if @user_value_on_subject.present? %>
+        <div class="row text-center valuation-text">
+          현재 <%= @subject.title %> 의 평가액은 <span style="color:red;"><%= @subject.average_value %></span> 원 입니다.
+        </div>
+        <div class="row text-center valuation-text">
+          당신의 평가액은 <span style="color:red;"><%= @user_value_on_subject %></span> 원 입니다.
+        </div>
+    <% else %>
+        <div class="row">
+          <div class="col-lg-4 col-lg-offset-4">
+            <div class="row">
+              <div class="text-center">
+                <h3>현재 <%= @subject.title %>의 평가액은 평가 후 볼 수 있습니다.</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 text-right">
+                <h3>당신이 생각하는 <%= @subject.title %>의 평가액은?</h3>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group" style="margin-top: 15px;">
+                  <div class="input-group">
+                    <span class="input-group-addon">￦</span>
+                    <input type="number" class="form-control" placeholder="평가액(자연수만 입력가능)" min="1" step="1" pattern="^[1-9]\d*$" id="input-subject-value" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-success" id="submit-subject-value">입력</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
 
-  <p>
-    <strong>Average value:</strong>
-    <%= @subject.average_value %>
-  </p>
-</div>
-<div class="container">
-  
-</div>
 <!-- 댓글 영역 -->
 <!-- 댓글 목록 -->
 <div class="chatContainer">

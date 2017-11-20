@@ -2,6 +2,41 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+//for valuations
+.valuationContainer {
+  height: 100%;
+  width: 100%;
+  //background-color: #e4e4e4;
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom :5px;
+}
+
+.valuationContentsContainer {
+  height: 150px;
+  width: 100%;
+  background-color: #f4f4f4;
+  border-top: 1px solid #e1e1e1;
+  border-left: 1px solid #d4d4d4;
+  border-right: 1px solid #d4d4d4;
+  border-bottom: 1px solid #c3c3c3;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.valuation-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 25px;
+}
+
+.col-centered {
+  margin: 0 auto;
+  float: none;
+}
+
 //for comments
 .chatTitleContainer {
 
@@ -21,7 +56,10 @@
   height: 100%;
   width: 100%;
   //background-color: #e4e4e4;
-  padding: 20px;
+  padding-top :5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
 
 }
 

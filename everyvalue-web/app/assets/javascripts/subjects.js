@@ -13,6 +13,9 @@ $(document).ready( function() {
     initUIEvents();
     ///////////////////////////////////////
 
+    //평가를 저장하기 위한 메서드
+    submitValue();
+
     //댓글을 저장하기 위한 메서드
     submitComment();
 
@@ -56,6 +59,43 @@ function detectReplyInputFocused() {
             $("#commentactions-" + currentComment).slideUp("fast");
         }
     });
+}
+
+function submitValue() {
+    $("#submit-subject-value").click(function() {
+        var userId = $("#textarea-user-id").val();
+
+        if(userId == null || userId.length == 0) {
+            alert("로그인 후 입력할 수 있습니다.");
+            return;
+        }
+
+        var inputValue = $("#input-subject-value").val();
+
+        if(isNaturalNumber(inputValue)) {
+            var data_params = "valuation[subject_id]=" + $("#textarea-subject-id").val()
+                            + "&valuation[user_id]=" + userId
+                            + "&valuation[user_nickname]=" + $("#textarea-user-nickname").val()
+                            + "&valuation[price]=" + inputValue;
+
+            $.ajax({
+                url: '/valuations',
+                type: 'POST',
+                data: data_params,
+                success: function() {
+                    location.reload();
+                },
+                error: function(e) {
+                    alert('평가에 실패했습니다.');
+                }
+            });
+        }
+    });
+}
+
+function isNaturalNumber(str) {
+    var n = Math.floor(Number(str));
+    return String(n) === str && n >= 0;
 }
 
 function submitComment() {

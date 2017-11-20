@@ -1,4 +1,5 @@
 class SubjectsController < ApplicationController
+  before_action :set_navbar_data, only: [:index, :show, :new, :edit]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :current_user, only: [:show]
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
