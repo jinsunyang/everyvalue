@@ -56,12 +56,12 @@ gem 'httpclient', '~> 2.8'
 
 #gems for front-end
 gem 'jquery-rails', '~> 4.3'
+gem 'jquery-ui-rails', '~> 6.0'
 # gem 'jquery-ui-rails', '~> 6.0'
 # gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-rails', '~> 4.7'
 # gem 'sprockets-rails', require: 'sprockets/railtie'
-gem 'dropzonejs-rails', '~> 0.8'
 # gem 'react-rails', '~> 2.2'
 gem 'kaminari', '~> 1.1'
 gem 'ransack', '~> 1.8'
