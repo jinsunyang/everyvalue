@@ -42,7 +42,7 @@ class SubjectsController < ApplicationController
   # POST /subjects
   # POST /subjects.json
   def create
-    puts "params : #{params[:subject_attachments]}"
+    puts "params : #{params}"
 
     @subject = Subject.new(subject_params)
 
