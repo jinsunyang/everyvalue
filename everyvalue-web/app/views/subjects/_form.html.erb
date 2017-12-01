@@ -1,5 +1,5 @@
 <!--, id: 'fileupload' -->
-<%= form_with(model: subject, local: true) do |form| %>
+<%= form_with(model: subject, local: true, html: { multipart: true, id: 'fileupload' }) do |form| %>
   <% if subject.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
@@ -48,9 +48,8 @@
           <i class="glyphicon glyphicon-plus"></i>
           <span>파일 업로드</span>
           <%= form.fields_for :subject_attachments do |at| %>
-            <%= at.file_field :content, multiple: true, name: 'subject_attachments[content][]', id: 'fileupload' %>
+            <%= at.file_field :content, multiple: true, name: 'subject_attachments[content][]' %>
           <% end %>
-
       </span>
       <button type="reset" class="btn btn-warning cancel">
         <i class="glyphicon glyphicon-ban-circle"></i>
@@ -69,7 +68,7 @@
   <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 
   <div class="actions">
-    <%= form.submit 'Create Subject', class: 'btn btn-success-outline' %>
+    <%= form.submit 'Create Subject', class: 'btn btn-success-outline', onclick: 'return validate();' %>
   </div>
 <% end %>
 
@@ -165,23 +164,34 @@
     $(function () {
         'use strict';
 
-        $('#fileupload').fileupload({
-          add: function(e, data) {
-              console.log("testttt");
-          }
-        });
+//        $('#fileupload').fileupload({
+//          add: function(e, data) {
+//              console.log("testttt");
+//          }
+//        });
 
-//        $("#fileupload")
-//            .bind('fileuploadadded', function (e, data) {
-//                console.log(data);
-//            })
-//            .bind('fileuploadfailed', function(e, data) {
-//                console.log(data);
-//            });
+        $("#fileupload")
+            .bind('fileuploadadded', function (e, data) {
+                console.log(data);
+            })
+            .bind('fileuploadfailed', function(e, data) {
+                console.log(data);
+            });
     });
 
-    $("input[name='subject_attachments[content][]']").change(function() {
-        console.log("attached!!!!!!!!!!!!!");
-        console.log($(this).val());
-    });
+    function validate() {
+        try {
+            console.log($("input[name='subject_attachments[content][]']"));
+            var input = $("input[name='subject_attachments[content][]']")[0].files;
+            console.log(input);
+            $.each(input[0].files, function(index, value) {
+                console.log(index);
+                console.log(value);
+            });
+            return true;
+        } catch(err) {
+            console.log(err);
+            return false;
+        }
+    }
 </script>
