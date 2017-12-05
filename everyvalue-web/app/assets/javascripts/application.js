@@ -10,11 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// require_tree . 을 추가하지 않았기 때문에 javascript 파일이 추가되면 일일이 밑에 추가해줘야 한다.
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require bootstrap-filestyle.min
 //= require bootstrap-select.min
 //= require home
 //= require root
