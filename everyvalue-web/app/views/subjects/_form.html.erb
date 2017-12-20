@@ -42,36 +42,10 @@
   </div>
 
   <%= form.fields_for :subject_attachments do |at| %>
-    <%= at.file_field :content, multiple: true, name: 'subject_attachments[content][]' %>
+    <%= at.file_field :content, multiple: true, name: 'subject_attachments[content][]', class: 'dropzone' %>
   <% end %>
 
   <div class="actions">
     <%= form.submit 'Create Subject', class: 'btn btn-success-outline', onclick: 'return validate();' %>
   </div>
 <% end %>
-
-<script>
-  $("input[name='subject_attachments[content][]']").fileinput({
-      theme: 'fa',
-      language: 'ko',
-      uploadUrl: '#',
-      showUpload: false,
-      allowedFileExtensions: ['jpg', 'png', 'gif']
-  });
-
-  function validate() {
-      try {
-          console.log($("input[name='subject_attachments[content][]']"));
-          var input = $("input[name='subject_attachments[content][]']")[0].files;
-          console.log(input);
-          $.each(input[0].files, function(index, value) {
-              console.log(index);
-              console.log(value);
-          });
-          return true;
-      } catch(err) {
-          console.log(err);
-          return false;
-      }
-  }
-</script>

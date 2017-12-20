@@ -19,6 +19,8 @@ $(document).ready( function() {
 
     //답글을 저장하기 위한 메서드
     submitReply();
+
+    initDropzone();
 });
 
 function initUIEvents() {
@@ -166,5 +168,11 @@ function postComment(contents, parentCommentId) {
                 alert('작성에 실패했습니다.');
             }
         });
+    }
+}
+
+function initDropzone() {
+    Dropzone.options.subject_subject_attachments_attributes_0_content = {
+        createImageThumbnails: true
     }
 }
