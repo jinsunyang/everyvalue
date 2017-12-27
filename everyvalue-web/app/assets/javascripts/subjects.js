@@ -172,7 +172,99 @@ function postComment(contents, parentCommentId) {
 }
 
 function initDropzone() {
-    Dropzone.options.subject_subject_attachments_attributes_0_content = {
-        createImageThumbnails: true
+    Dropzone.options.subjectForm = {
+        autoProcessQueue: false,
+        dictDefaultMessage: "파일을 끌어다 놓으시거나 클릭하세요.",
+        uploadMultiple: true,
+        parallelUploads: 100,
+        maxFiles: 100,
+        addRemoveLinks : true,
+        paramName: 'subject_attachments[]',
+        dictRemoveFile: '파일 삭제',
+
+        // previewTemplate: document.querySelector('#preview-template').innerHTML,
+        // thumbnailHeight: 120,
+        // thumbnailWidth: 120,
+
+        // createImageThumbnails: true
+
+        // The setting up of the dropzone
+        init: function() {
+            var myDropzone = this;
+
+            // this.on("addedfile", function(file) {
+            //
+            //     // Create the remove button
+            //     var removeButton = Dropzone.createElement("<button>Remove file</button>");
+            //
+            //     // Capture the Dropzone instance as closure.
+            //     var _this = this;
+            //
+            //     // Listen to the click event
+            //     removeButton.addEventListener("click", function(e) {
+            //         // Make sure the button click doesn't submit the form:
+            //         e.preventDefault();
+            //         e.stopPropagation();
+            //
+            //         // Remove the file preview.
+            //         _this.removeFile(file);
+            //         // If you want to the delete the file on the server as well,
+            //         // you can do the AJAX request here.
+            //     });
+            //
+            //     // Add the button to the file preview element.
+            //     file.previewElement.appendChild(removeButton);
+            //
+            //     // $(".dz-details").on("click", function(e) {
+            //     //    e.preventDefault();
+            //     //    e.stopPropagation();
+            //     //
+            //     //    _this.removeFile(file);
+            //     // });
+            // });
+
+            // First change the button to actually tell Dropzone to process the queue.
+            this.element.querySelector("input[type=submit]").addEventListener("click", function(e) {
+                // Make sure that the form isn't actually being sent.
+                // console.log($("input[name='subject_attachments[content][]'")[0].files);
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzone.processQueue();
+            });
+
+            // this.on("complete", function (file) {
+            //     if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+            //         // show 로 가거나, 목록으로 가거나인데 show 로 가야할듯.
+            //
+            //     }
+            // });
+
+            // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
+            // of the sending event because uploadMultiple is set to true.
+            // this.on("sendingmultiple", function() {
+            //     // Gets triggered when the form is actually being sent.
+            //     // Hide the success button or the complete form.
+            // });
+            // this.on("successmultiple", function(files, response) {
+            //     // Gets triggered when the files have successfully been sent.
+            //     // Redirect user or notify of success.
+            // });
+            // this.on("errormultiple", function(files, response) {
+            //     // Gets triggered when there was an error sending the files.
+            //     // Maybe show form again, and notify user of error
+            // });
+        },
+
+        success: function(file, response) {
+            var redirect_url = response["redirect"];
+            if (redirect_url == null || redirect_url.length == 0) {
+                redirect_url = "http://localhost:5000"
+            }
+            window.location.replace(redirect_url);
+        },
+
+        error: function(file, errorMessage) {
+            console.log(errorMessage);
+        }
     }
 }

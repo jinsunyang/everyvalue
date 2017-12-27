@@ -42,22 +42,22 @@ class SubjectsController < ApplicationController
   # POST /subjects
   # POST /subjects.json
   def create
-    puts "params : #{params}"
-
     @subject = Subject.new(subject_params)
 
     respond_to do |format|
       if @subject.save
         HashtagsSubject.create(hashtag_id: @hashtag_id, subject_id: @subject.id)
         subject_attachments = params[:subject_attachments]
-        if subject_attachments.present? && subject_attachments['content'].present?
-          subject_attachments['content'].each do |c|
+        if subject_attachments.present? && subject_attachments[0].present?
+          contents = subject_attachments[0].values
+          contents.each do |c|
             @subject.subject_attachments.create!(content: c)
           end
         end
 
         format.html { redirect_to @subject, notice: 'Subject was successfully created.' }
-        format.json { render :show, status: :created, location: @subject }
+        # format.json { render json: { status: :created, redirect: subjects_url(@subject) } }
+        format.json { render json: { redirect: subject_url(@subject) } }
       else
         format.html { render :new }
         format.json { render json: @subject.errors, status: :unprocessable_entity }
