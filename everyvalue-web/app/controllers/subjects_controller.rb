@@ -1,7 +1,7 @@
 class SubjectsController < ApplicationController
   before_action :set_navbar_data, only: [:index, :show, :new, :edit]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :current_user, only: [:show]
+  before_action :current_user, only: [:show, :new, :create, :edit, :update, :destroy]
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_action :set_hashtag_id, only: [:create, :update]
 
@@ -43,6 +43,8 @@ class SubjectsController < ApplicationController
   # POST /subjects.json
   def create
     @subject = Subject.new(subject_params)
+    @subject.user = @current_user
+    @subject.user_nickname = @current_user.nickname
 
     respond_to do |format|
       if @subject.save
