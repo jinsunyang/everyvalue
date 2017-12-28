@@ -189,9 +189,9 @@ function initDropzone() {
             // First change the button to actually tell Dropzone to process the queue.
             this.element.querySelector("input[type=submit]").addEventListener("click", function(e) {
                 // Make sure that the form isn't actually being sent.
-                // console.log($("input[name='subject_attachments[content][]'")[0].files);
-                e.preventDefault();
-                e.stopPropagation();
+                // 아래 두 줄을 수행하면 원래의 form post 가 수행되지 않음.
+                // e.preventDefault();
+                // e.stopPropagation();
                 myDropzone.processQueue();
             });
         },

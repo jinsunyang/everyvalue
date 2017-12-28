@@ -12,36 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :subject_title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :contents %>
-    <%= form.text_area :contents, id: :subject_contents %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :subject_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_nickname %>
-    <%= form.text_field :user_nickname, id: :subject_user_nickname %>
-  </div>
-
-  <div class="field">
-    <label>Category</label>
-    <select id="select_hashtag">
+    <label>카테고리</label><br>
+    <select id="select_hashtag" class="selectpicker" title="평가 카테고리를 고르세요">
       <% hashtags_options.each do |hashtag| %>
-          <option value="<%= hashtag.id %>" <% if hashtags_options.first == hashtag %>selected="selected" <% end %>> <%= hashtag.name %></option>
+          <option value="<%= hashtag.id %>"> <%= hashtag.name %></option>
       <% end %>
     </select>
     <input type="hidden" name="subject[hashtag_id]" id="subject_hashtag_id"/>
   </div>
 
+  <div class="form-group">
+    <%= form.label :title, '제목' %>
+    <%= form.text_field :title, id: :subject_title, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contents, '내용' %>
+    <%= form.text_area :contents, id: :subject_contents, class: 'form-control', rows: '30', style: 'resize:none;'  %>
+  </div>
+
   <div class="actions">
-    <%= form.submit 'Create Subject', class: 'btn btn-success-outline' %>
+    <%= form.submit '저장하기', class: 'btn btn-success' %>
   </div>
 <% end %>
