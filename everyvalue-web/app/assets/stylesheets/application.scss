@@ -18,8 +18,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
-@import "summernote-lite";
-//@import "summernote-custom-theme";
+// summernote-lite는 아직 0.8.8.0 버전에는 적용되지 않았다고 함.
+@import "summernote";
 
 // for paginate css customization
 

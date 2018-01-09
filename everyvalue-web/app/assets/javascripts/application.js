@@ -16,7 +16,8 @@
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require bootstrap-select.min
-//= require summernote/summernote-lite
+// summernote-lite는 아직 0.8.8.0 버전에는 적용되지 않았다고 함.
+//= require summernote/summernote
 //= require home
 //= require root
 //= require subjects
