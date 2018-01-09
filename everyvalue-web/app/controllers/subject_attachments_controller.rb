@@ -24,17 +24,27 @@ class SubjectAttachmentsController < ApplicationController
   # POST /subject_attachments
   # POST /subject_attachments.json
   def create
+    puts "params : #{params}"
+    puts "subject_attachment_params : #{subject_attachment_params}"
+
     @subject_attachment = SubjectAttachment.new(subject_attachment_params)
 
-    respond_to do |format|
-      if @subject_attachment.save
-        format.html { redirect_to @subject_attachment, notice: 'Subject attachment was successfully created.' }
-        format.json { render :show, status: :created, location: @subject_attachment }
-      else
-        format.html { render :new }
-        format.json { render json: @subject_attachment.errors, status: :unprocessable_entity }
-      end
-    end
+    puts "content : #{@subject_attachment.content}"
+
+    # render text: 'http://naver.com'
+    render json: { url: @subject_attachment.content, content_id: @subject_attachment.id } if @subject_attachment.save
+
+    # respond_to do |format|
+    #   if @subject_attachment.save
+    #     format.html { redirect_to @subject_attachment, notice: 'Subject attachment was successfully created.' }
+    #     format.json { render :show, status: :created, location: @subject_attachment }
+    #     render text: @subject_attachment.content
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @subject_attachment.errors, status: :unprocessable_entity }
+    #     render text: 'http://www.naver.com'
+    #   end
+    # end
   end
 
   # PATCH/PUT /subject_attachments/1

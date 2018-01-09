@@ -19,6 +19,9 @@ $(document).ready( function() {
 
     //답글을 저장하기 위한 메서드
     submitReply();
+
+    //wysiwyg 초기화 (summernote)
+    initSubjectContentsWysiwyg();
 });
 
 function initUIEvents() {
@@ -164,6 +167,58 @@ function postComment(contents, parentCommentId) {
             },
             error: function(e) {
                 alert('작성에 실패했습니다.');
+            }
+        });
+    }
+}
+
+function initSubjectContentsWysiwyg() {
+    $('#subject_contents').summernote({
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            // ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            // ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video', 'hr']]
+        ],
+        height: 500,
+        lang : 'ko-KR',
+        callbacks: {
+            onImageUpload: function(files) {
+                sendFile(files[0]);
+            }
+        }
+
+    });
+
+    // $('.note-editable').css('font-size','14px');
+
+    function sendFile(file) {
+        data = new FormData();
+        data.append("subject_attachment[content]", file);
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: $('#subject_contents').data().uploadUrl,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data, response) {
+                console.log("success");
+                console.log(data);
+                console.log(data["url"]);
+                console.log(data["content_id"]);
+
+
+                // 여기서 subject_attachments id를 subject submit 시에 넘겨줘서 subject_attachments 의 subject_id 에 빈 값이 들어가지 않도록
+                // <input type="hidden" name="subject[subject_attachments]" value="542"> 이런식으로 값이 추가되도록
+                // wysiwyg 에서 이미지를 지우면 해당 subject에 속했던 subject_attachments의 id도 비워준다.
+
+                // $('#subject_contents').summernote('insertImage', data["url"], data["url"]);
             }
         });
     }
