@@ -66,6 +66,7 @@ gem 'font-awesome-rails', '~> 4.7'
 gem 'kaminari', '~> 1.1'
 gem 'ransack', '~> 1.8'
 gem 'bootstrap-kaminari-views', '~> 0.0'
+gem 'summernote-rails', '~> 0.8.8.0'
 # gem 'select2-rails'
 # gem 'active_link_to'
 # gem 'axlsx'  # excel generate

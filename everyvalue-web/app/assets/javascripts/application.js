@@ -16,6 +16,7 @@
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require bootstrap-select.min
+//= require summernote/summernote-lite
 //= require home
 //= require root
 //= require subjects
