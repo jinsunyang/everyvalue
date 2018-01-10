@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <label>카테고리</label><br>
     <select id="select_hashtag" class="selectpicker" title="평가 카테고리를 고르세요">
       <% hashtags_options.each do |hashtag| %>
@@ -21,14 +21,14 @@
     <input type="hidden" name="subject[hashtag_id]" id="subject_hashtag_id"/>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :title, '제목' %>
-    <%= form.text_field :title, id: :subject_title %>
+    <%= form.text_field :title, id: :subject_title, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :contents, '내용' %>
-    <%= form.text_area :contents, id: :subject_contents, data: { upload_url: subject_attachments_path } %>
+    <%= form.text_area :contents, id: :subject_contents, data: { upload_url: subject_attachments_path }, class: 'form-control' %>
   </div>
 
   <div id="subject_attachment_id" style="display:none;"></div>
