@@ -199,6 +199,7 @@ function initSubjectContentsWysiwyg() {
                 console.log(target);
                 console.log(target[0].src)
                 // deleteFile(target[0].src);
+                // sendFile에서 success 했을 때 img tag에 data-id 로 id를 넣어두고 delete할 때 해당 id 로 activerecord destory 하면서 upload 되었던 파일도 삭제한다.
             }
         }
 
