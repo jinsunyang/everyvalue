@@ -11,9 +11,15 @@ class ContentUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  # SUBJECT_CONTENT_PREFIX = 'subject_content_uploaded'
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  def base_store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}"
   end
 
@@ -52,8 +58,18 @@ class ContentUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
+  # def filename
+  #   # "#{model.id}.#{file.extension}" if original_filename
+  #   "#{SUBJECT_CONTENT_PREFIX}_#{original_filename}"
+  # end
+
   def filename
-    # "#{model.id}.#{file.extension}" if original_filename
-    original_filename if original_filename
+    "#{secure_token(10)}.#{file.extension}" if original_filename.present?
+  end
+
+  protected
+  def secure_token(length=16)
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.hex(length/2))
   end
 end

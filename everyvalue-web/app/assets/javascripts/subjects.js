@@ -189,7 +189,16 @@ function initSubjectContentsWysiwyg() {
         lang : 'ko-KR',
         callbacks: {
             onImageUpload: function(files) {
-                sendFile(files[0]);
+                console.log(files);
+                Array.from(files).forEach(file => {
+                    sendFile(file);
+                });
+            },
+            onMediaDelete: function(target) {
+                console.log("testtesttest");
+                console.log(target);
+                console.log(target[0].src)
+                // deleteFile(target[0].src);
             }
         }
 
@@ -208,18 +217,24 @@ function initSubjectContentsWysiwyg() {
             contentType: false,
             processData: false,
             success: function(data, response) {
-                console.log("success");
-                console.log(data);
-                console.log(data["url"]);
-                console.log(data["content_id"]);
-
-
                 // 여기서 subject_attachments id를 subject submit 시에 넘겨줘서 subject_attachments 의 subject_id 에 빈 값이 들어가지 않도록
                 // <input type="hidden" name="subject[subject_attachments]" value="542"> 이런식으로 값이 추가되도록
                 // wysiwyg 에서 이미지를 지우면 해당 subject에 속했던 subject_attachments의 id도 비워준다.
+                insertHiddenInputForSubjectAttachmentId(document.getElementById('subject_attachment_id'), data["content_id"]);
 
-                // $('#subject_contents').summernote('insertImage', data["url"], data["url"]);
+                $('#subject_contents').summernote('insertImage', data["url"]["url"], data["url"]["url"]);
             }
         });
     }
+}
+
+function insertHiddenInputForSubjectAttachmentId(parentElement, contentId) {
+    var hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = '[subject_attachments][]';
+    hiddenInput.value = contentId;
+
+    parentElement.appendChild(hiddenInput);
+
+    return;
 }

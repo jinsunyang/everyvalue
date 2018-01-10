@@ -53,9 +53,12 @@ class SubjectsController < ApplicationController
       if @subject.save
         HashtagsSubject.create(hashtag_id: @hashtag_id, subject_id: @subject.id)
         subject_attachments = params[:subject_attachments]
-        if subject_attachments.present? && subject_attachments['content'].present?
-          subject_attachments['content'].each do |c|
-            @subject.subject_attachments.create!(content: c)
+        if subject_attachments.present?
+          subject_attachments.each do |id|
+            subject_attachment = SubjectAttachment.find_by_id(id)
+            if subject_attachment.present? && @subject.contents.include?(URI.encode(subject_attachment.content.file.filename))
+              subject_attachment.update_column(:subject_id, @subject.id)
+            end
           end
         end
 

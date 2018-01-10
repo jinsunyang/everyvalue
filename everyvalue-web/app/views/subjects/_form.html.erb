@@ -31,10 +31,7 @@
     <%= form.text_area :contents, id: :subject_contents, data: { upload_url: subject_attachments_path } %>
   </div>
 
-  <%= form.fields_for :subject_attachments do |at| %>
-      <%= at.hidden_field :id, name: 'subject_attachments[content]' %>
-  <% end %>
-
+  <div id="subject_attachment_id" style="display:none;"></div>
   <div class="actions">
     <%= form.submit '저장하기', class: 'btn btn-success' %>
   </div>
