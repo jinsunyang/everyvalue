@@ -1,91 +1,86 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
-  <p>
-    <strong>Title:</strong>
-    <%= @subject.title %>
-  </p>
+<div class="container subjectContainer">
+  <div class="row">
+    <p>
+      <%= @subject.title %>
+      <%= @subject.user_nickname %>
+    </p>
 
-  <p>
-    <strong>Contents:</strong>
-    <%= @subject.contents.html_safe %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= @subject.user %>
-  </p>
-
-  <p>
-    <strong>User nickname:</strong>
-    <%= @subject.user_nickname %>
-  </p>
-</div>
-<!-- 평가 영역 -->
-<!-- 현재 해당 subject의 평가액이 노출되는 영역 -->
-<div class="valuationContainer">
-  <div class="valuationContentsContainer">
-    <% if @user_value_on_subject.present? %>
-        <div class="row text-center valuation-text">
-          현재 <%= @subject.title %> 의 평가액은 <span style="color:red;"><%= @subject.average_value %></span> 원 입니다.
-        </div>
-        <div class="row text-center valuation-text">
-          당신의 평가액은 <span style="color:red;"><%= @user_value_on_subject %></span> 원 입니다.
-        </div>
-    <% else %>
-        <div class="row">
-          <div class="col-lg-4 col-lg-offset-4">
-            <div class="row">
-              <div class="text-center">
-                <h3>현재 <%= @subject.title %>의 평가액은 평가 후 볼 수 있습니다.</h3>
+    <p>
+      <%= @subject.contents.html_safe %>
+    </p>
+  </div>
+  <div class="row">
+    <div class="valuationContentsContainer">
+      <% if @user_value_on_subject.present? %>
+          <div class="row text-center valuation-text">
+            현재 <%= @subject.title %> 의 평가액은 <span style="color:red;"><%= @subject.average_value %></span> 원 입니다.
+          </div>
+          <div class="row text-center valuation-text">
+            당신의 평가액은 <span style="color:red;"><%= @user_value_on_subject %></span> 원 입니다.
+          </div>
+      <% else %>
+          <div class="row">
+            <div class="col-lg-12 col-xl-12">
+              <div class="row">
+                <div class="text-center valuation-text">
+                  현재 <%= @subject.title %>의 평가액은 평가 후 볼 수 있습니다.
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 text-right">
-                <h3>당신이 생각하는 <%= @subject.title %>의 평가액은?</h3>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group" style="margin-top: 15px;">
-                  <div class="input-group">
-                    <span class="input-group-addon">￦</span>
-                    <input type="number" class="form-control" placeholder="평가액(자연수만 입력가능)" min="1" step="1" pattern="^[1-9]\d*$" id="input-subject-value" />
-                    <span class="input-group-btn">
+              <div class="row" style="margin-left:20px; margin-right:20px;">
+                <div class="col-lg-6 col-xl-6 text-center valuation-text">
+                  당신이 생각하는 <%= @subject.title %>의 평가액은?
+                </div>
+                <div class="col-lg-6 col-xl-6">
+                  <div class="form-group" style="margin-top: 15px;">
+                    <div class="input-group">
+                      <span class="input-group-addon">￦</span>
+                      <input type="number" class="form-control" placeholder="평가액(자연수만 입력가능)" min="1" step="1" pattern="^[1-9]\d*$" id="input-subject-value" />
+                      <span class="input-group-btn">
                       <button type="button" class="btn btn-success" id="submit-subject-value">입력</button>
                     </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-    <% end %>
-  </div>
-</div>
-
-<!-- 댓글 영역 -->
-<!-- 댓글 목록 -->
-<div class="chatContainer">
-  <!--<div class="chatTitleContainer">댓글</div>-->
-  <div class="chatHistoryContainer">
-    <ul class="formComments">
-      <% @comments.each do |comment| %>
-          <%= render partial: 'subjects/comment', locals: { comment: comment } %>
       <% end %>
-    </ul>
+    </div>
   </div>
+  <div class="row">
+    <!--<div class="chatTitleContainer">댓글</div>-->
+    <div class="chatHistoryContainer">
+      <ul class="formComments">
+        <% @comments.each do |comment| %>
+            <%= render partial: 'subjects/comment', locals: { comment: comment } %>
+        <% end %>
+      </ul>
+    </div>
 
-  <!-- 내 댓글 다는 영역 -->
-  <div class="input-group input-group-sm chatMessageControls">
-    <span class="input-group-addon" id="sizing-addon3">댓글 작성</span>
-    <input type="text" class="form-control" placeholder="내용을 입력하세요." aria-describedby="sizing-addon3" id="commentText">
-    <span class="input-group-btn">
+    <!-- 내 댓글 다는 영역 -->
+    <div class="input-group input-group-sm chatMessageControls">
+      <span class="input-group-addon" id="sizing-addon3">댓글 작성</span>
+      <input type="text" class="form-control" placeholder="내용을 입력하세요." aria-describedby="sizing-addon3" id="commentText">
+      <span class="input-group-btn">
       <!--<button id="clearMessageButton" class="btn btn-default" type="button">초기화</button>-->
       <button id="sendMessageButton" class="btn btn-primary" type="button"><i class="fa fa-send"></i>저장</button>
     </span>
-    <!--<span class="input-group-btn">-->
+      <!--<span class="input-group-btn">-->
       <!--<button id="undoSendButton" class="btn btn-default" type="button" disabled><i class="fa fa-undo"></i>취소</button>-->
-    <!--</span>-->
+      <!--</span>-->
+    </div>
   </div>
 </div>
+<!-- 평가 영역 -->
+<!-- 현재 해당 subject의 평가액이 노출되는 영역 -->
+<!--<div class="valuationContainer">-->
+<!--</div>-->
+
+<!-- 댓글 영역 -->
+<!-- 댓글 목록 -->
+<!--<div class="chatContainer">-->
+<!--</div>-->
 <div class="container">
   <%= link_to 'Edit', edit_subject_path(@subject) %> |
   <%= link_to 'Back', subjects_path %>
