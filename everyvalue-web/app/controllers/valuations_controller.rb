@@ -26,14 +26,10 @@ class ValuationsController < ApplicationController
   def create
     @valuation = Valuation.new(valuation_params)
 
-    respond_to do |format|
-      if @valuation.save
-        format.html { redirect_to @valuation, notice: 'Valuation was successfully created.' }
-        format.json { render :show, status: :created, location: @valuation }
-      else
-        format.html { render :new }
-        format.json { render json: @valuation.errors, status: :unprocessable_entity }
-      end
+    if @valuation.save
+      render json: nil
+    else
+      render json: nil
     end
   end
 
