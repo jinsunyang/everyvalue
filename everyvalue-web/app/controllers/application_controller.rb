@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
     q[:selected_hashtag_hidden] = params[:hashtag_id] if params[:hashtag_id].present?
 
     @selected_subjects = subjects_by_ransack(q)
-    @subjects = @selected_subjects.result.page(@page).per(@per)
+    #ransack order query 로 ordering 하고 싶었는데 구현이 잘 안되어서 그냥 바깥에서 했음.
+    @subjects = @selected_subjects.result.order('id desc').page(@page).per(@per)
     @selected_subjects.build_condition if @selected_subjects.conditions.empty?
   end
 
