@@ -35,7 +35,7 @@
                 <strong><%= @current_user.nickname %></strong> 님 안녕하세요!
               </div>
               <div class="col-lg-6 col-xl-6 text-right">
-                <%= link_to '로그아웃', new_user_session_path %>
+                <%= link_to '로그아웃', destroy_user_session_path, method: :delete %>
               </div>
           <% else %>
               <div class="text-right">
