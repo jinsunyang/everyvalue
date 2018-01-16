@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
   before_action :check_recaptcha, only: [:create]
+  before_action :set_navbar_data, only: [:new]
 
   def new
     super
